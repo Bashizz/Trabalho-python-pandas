@@ -1,7 +1,7 @@
 import pandas as pd
 
 pd.set_option('display.width', 1600)
-pd.set_option('display.max_columns', 100)
+pd.set_option('display.max_columns', 13)
 def norte():
     while True:
         print("1.Porto (1863 - 2018)")
@@ -96,7 +96,9 @@ def terceira():
         print("2.Precepitacao maxima:")
         print("3.Precepitacao minima:")
         print("4.Precepitacao:")
-        print("5.Voltar:")
+        print("5.Pesquisar por ano:")
+        print("6.Pesquisar por mes:")
+        print("7.Voltar:")
         op = input("Escolha a Informacao que deseja ver: (1-5) ")
 
         if op == '1':
@@ -111,7 +113,7 @@ def terceira():
         elif op == '4':
             prec = dfs['prec']
             print(prec.to_string())
-        elif op == '5':
+        elif op == '7':
             print("A voltar...")
             break;
         else:
@@ -120,7 +122,7 @@ def terceira():
 
 
 def faro():
-    faro = "porto.xlsx"
+    faro = "faro.xlsx"
     faro_sheets = ['meta', 'tmin', 'tmax', 'prec']
     dfs = pd.read_excel(faro, sheet_name=['meta', 'tmin', 'tmax', 'prec'])
 
@@ -136,7 +138,7 @@ def faro():
     prec = dfs['prec']
     print(prec.to_string())
 def funchal():
-    funchal = "porto.xlsx"
+    funchal = "funchal.xlsx"
     funchal_sheets = ['meta', 'tmin', 'tmax', 'prec']
     dfs = pd.read_excel(funchal, sheet_name=['meta', 'tmin', 'tmax', 'prec'])
 
@@ -152,7 +154,7 @@ def funchal():
     prec = dfs['prec']
     print(prec.to_string())
 def pontaDelgada():
-    pontaDelgada = "porto.xlsx"
+    pontaDelgada = "pontaDelgada.xlsx"
     pontaDelgada_sheets = ['meta', 'tmin', 'tmax', 'prec']
     dfs = pd.read_excel(pontaDelgada, sheet_name=['meta', 'tmin', 'tmax', 'prec'])
 
@@ -185,7 +187,7 @@ def porto():
     print(prec.to_string())
 def penhasDouradas():
 
-    penhasDouradas = "porto.xlsx"
+    penhasDouradas = "penhasDouradas.xlsx"
     penhasDouradas_sheets = ['meta', 'tmin', 'tmax', 'prec']
     dfs = pd.read_excel(penhasDouradas, sheet_name=['meta', 'tmin', 'tmax', 'prec'])
 
@@ -298,7 +300,7 @@ def evora():
     prec = dfs['prec']
     print(prec.to_string())
 def lisboa():
-    lisboa = "evora.xlsx"
+    lisboa = "lisboa.xlsx"
     lisboa_sheets = ['meta', 'tmin', 'tmax', 'prec']
     dfs = pd.read_excel(lisboa, sheet_name=['meta', 'tmin', 'tmax', 'prec'])
 
@@ -314,7 +316,7 @@ def lisboa():
     prec = dfs['prec']
     print(prec.to_string())
 def portalegre():
-    portalegre = "evora.xlsx"
+    portalegre = "portalegre.xlsx"
     portalegre_sheets = ['meta', 'tmin', 'tmax', 'prec']
     dfs = pd.read_excel(portalegre, sheet_name=['meta', 'tmin', 'tmax', 'prec'])
 
@@ -330,7 +332,7 @@ def portalegre():
     prec = dfs['prec']
     print(prec.to_string())
 def setubal():
-    setubal = "evora.xlsx"
+    setubal = "setubal.xlsx"
     setubal_sheets = ['meta', 'tmin', 'tmax', 'prec']
     dfs = pd.read_excel(setubal, sheet_name=['meta', 'tmin', 'tmax', 'prec'])
 
@@ -346,7 +348,7 @@ def setubal():
     prec = dfs['prec']
     print(prec.to_string())
 def santarem():
-    santarem = "evora.xlsx"
+    santarem = "santarem.xlsx"
     santarem_sheets = ['meta', 'tmin', 'tmax', 'prec']
     dfs = pd.read_excel(santarem, sheet_name=['meta', 'tmin', 'tmax', 'prec'])
 
