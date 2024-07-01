@@ -113,6 +113,15 @@ def terceira():
         elif op == '4':
             prec = dfs['prec']
             print(prec.to_string())
+        elif op == '5':
+            dfs = pd.read_excel(terceira, sheet_name=['tmin', 'tmax', 'prec'])
+            user_year = int(input("Qual o ano que deseja ver: (1863 - 2018)"))
+            year_column = 'year'
+            merged_df = pd.concat(dfs,  ignore_index=False)
+            print(merged_df.to_string())
+
+        elif op == '6':
+            print(result_df)
         elif op == '7':
             print("A voltar...")
             break;
