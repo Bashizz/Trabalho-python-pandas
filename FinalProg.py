@@ -93,42 +93,89 @@ def terceira():
 
     while True:
         print("1.Informacao de dados::")
-        print("2.Precepitacao maxima:")
-        print("3.Precepitacao minima:")
+        print("2.Precepitacao minima:")
+        print("3.Precepitacao maxima:")
         print("4.Precepitacao:")
-        print("5.Pesquisar por ano:")
-        print("6.Pesquisar por mes:")
-        print("7.Voltar:")
+        print("5.Voltar:")
         op = input("Escolha a Informacao que deseja ver: (1-5) ")
 
         if op == '1':
             meta = dfs['meta']
             print(meta.to_string())
         elif op == '2':
-            tmin = dfs['tmin']
-            print(tmin.to_string())
+            print('1.Ver tudo')
+            print('2.Escolher ano')
+            print('3.Escolher mes')
+            print('4.Voltar')
+            op = input()
+            if op == '1':
+                tmin = dfs['tmin']
+                print(tmin.to_string())
+            elif op == '2':
+                df = pd.read_excel(terceira, sheet_name='tmin')
+                ano = int(input('Indique o ano (1863 - 2018): '))
+                filtered_df = df[df['year'] == ano]
+                print(filtered_df.to_string())
+            elif op == '3':
+                df = pd.read_excel(terceira, sheet_name='tmin')
+                mes = input('Indique o mes (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dez): ')
+                if mes in df.columns:
+                    month_data = df[['year', mes]]
+                    print(month_data.to_string())
+                else:
+                    print("Mes nao existe!")
+            elif op == '4':
+                print("A voltar...")
+                break;
         elif op == '3':
-            tmax = dfs['tmax']
-            print(tmax.to_string())
+            print('1.Ver tudo')
+            print('2.Escolher ano')
+            print('3.Escolher mes')
+            print('4.Voltar')
+            op = input()
+            if op == '1':
+                tmax = dfs['tmax']
+                print(tmax.to_string())
+            elif op == '2':
+                df = pd.read_excel(terceira, sheet_name='tmax')
+                ano = int(input('Indique o ano (1863 - 2018): '))
+                filtered_df = df[df['year'] == ano]
+                print(filtered_df.to_string())
+            elif op == '3':
+                df = pd.read_excel(terceira, sheet_name='tmax')
+                mes = input('Indique o mes (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dez): ')
+                if mes in df.columns:
+                    month_data = df[['year', mes]]
+                    print(month_data.to_string())
+                else:
+                    print("Mes nao existe!")
         elif op == '4':
-            prec = dfs['prec']
-            print(prec.to_string())
+            print('1.Ver tudo')
+            print('2.Escolher ano')
+            print('3.Escolher mes')
+            print('4.Voltar')
+            op = input()
+            if op == '1':
+                prec = dfs['prec']
+                print(prec.to_string())
+            elif op == '2':
+                df = pd.read_excel(terceira, sheet_name='prec')
+                ano = int(input('Indique o ano (1863 - 2018): '))
+                filtered_df = df[df['year'] == ano]
+                print(filtered_df.to_string())
+            elif op == '3':
+                df = pd.read_excel(terceira, sheet_name='prec')
+                mes = input('Indique o mes (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dez): ')
+                if mes in df.columns:
+                    month_data = df[['year', mes]]
+                    print(month_data.to_string())
+                else:
+                    print("Mes nao existe!")
         elif op == '5':
-            dfs = pd.read_excel(terceira, sheet_name=['tmin', 'tmax', 'prec'])
-            user_year = int(input("Qual o ano que deseja ver: (1863 - 2018)"))
-            year_column = 'year'
-            merged_df = pd.concat(dfs,  ignore_index=False)
-            print(merged_df.to_string())
-
-        elif op == '6':
-            print(result_df)
-        elif op == '7':
             print("A voltar...")
             break;
         else:
             print("Escolha uma opcao valida (1-5)!")
-
-
 
 def faro():
     faro = "faro.xlsx"
