@@ -87,22 +87,38 @@ def ilhas():
         else:
             print("Escolha uma opcao valida (1-8)!")
 def terceira():
-
-    terceira = "porto.xlsx"
+    terceira = "terceira.xlsx"
     terceira_sheets = ['meta', 'tmin', 'tmax', 'prec']
     dfs = pd.read_excel(terceira, sheet_name=['meta', 'tmin', 'tmax', 'prec'])
 
-    meta = dfs['meta']
-    print(meta.to_string())
+    while True:
+        print("1.Informacao de dados::")
+        print("2.Precepitacao maxima:")
+        print("3.Precepitacao minima:")
+        print("4.Precepitacao:")
+        print("5.Voltar:")
+        op = input("Escolha a Informacao que deseja ver: (1-5) ")
 
-    tmin = dfs['tmin']
-    print(tmin.to_string())
+        if op == '1':
+            meta = dfs['meta']
+            print(meta.to_string())
+        elif op == '2':
+            tmin = dfs['tmin']
+            print(tmin.to_string())
+        elif op == '3':
+            tmax = dfs['tmax']
+            print(tmax.to_string())
+        elif op == '4':
+            prec = dfs['prec']
+            print(prec.to_string())
+        elif op == '5':
+            print("A voltar...")
+            break;
+        else:
+            print("Escolha uma opcao valida (1-5)!")
 
-    tmax = dfs['tmax']
-    print(tmax.to_string())
 
-    prec = dfs['prec']
-    print(prec.to_string())
+
 def faro():
     faro = "porto.xlsx"
     faro_sheets = ['meta', 'tmin', 'tmax', 'prec']
