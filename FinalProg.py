@@ -8,8 +8,9 @@ def norte():
         print("2.bragancanca (1863 - 2018)")
         print("3.Montalegre (1863 - 2018)")
         print("4.Penhas Douradas (1863 - 2018)")
-        print("5.Voltar...")
-        op = input("Escolha a regiao central: (1-7) ")
+        print("5. Ver todos os dados")
+        print("6. Voltar...")
+        op = input("Escolha a regiao: (1-6) ")
         if op == '1':
             porto()
         elif op == '2':
@@ -19,52 +20,28 @@ def norte():
         elif op == '4':
             penhasDouradas()
         elif op == '5':
-            print("5. A Voltar...")
-            break;
-        else:
-            print("Escolha uma opcao valida (1-8)!")
-def centro():
-    while True:
-        print("1.Castelo Branco (1863 - 2018)")
-        print("2.Coimbra (1863 - 2018)")
-        print("3.Evora (1863 - 2018)")
-        print("4.Lisboa (1863 - 2018)")
-        print("5.Portalegre (1863 - 2018)")
-        print("6.Setubal (1863 - 2018)")
-        print("7.Santarem (1863 - 2018)")
-        print("8.Voltar...")
-        op = input("Escolha a regiao central: (1-7) ")
-        if op == '1':
-            casteloBranco()
-        elif op == '2':
-            coimbra()
-        elif op == '3':
-            evora()
-        elif op == '4':
-            lisboa()
-        elif op == '5':
-            portalegre()
+            norte_ver_todos_os_dados()
         elif op == '6':
-            setubal()
-        elif op == '7':
-            santarem()
-        elif op == '8':
-            print("A voltar...")
+            print("6. A Voltar...")
             break;
         else:
-            print("Escolha uma opcao valida (1-8)!")
+            print("Escolha uma opcao valida (1-6)!")
+
 def sul():
     while True:
         print("1.Beja (1863 - 2018)")
         print("2.Faro (1863 - 2018)")
-        print("3.Voltar...")
-        op = input("Escolha a regiao central: (1-3) ")
+        print("3.Ver todos os dados.")
+        print("4.Voltar...")
+        op = input("Escolha a regiao: (1-3) ")
         if op == '1':
             beja()
         elif op == '2':
             faro()
         elif op == '3':
-            print("3. A Voltar...")
+            sul_ver_todos_os_dados()
+        elif op == '4':
+            print("4. A Voltar...")
             break;
         else:
             print("Escolha uma opcao valida (1-8)!")
@@ -75,7 +52,7 @@ def ilhas():
         print("3. Ponta Delgada (1863 - 2018)")
         print("4. Ver todos os dados")
         print("5. Voltar...")
-        op = input("Escolha a regiao central: (1-5) ")
+        op = input("Escolha a regiao: (1-5) ")
         if op == '1':
             terceira()
         elif op == '2':
@@ -240,23 +217,20 @@ def ilhas_ver_todos_os_dados():
     ponta_delgada_data = {}
 
     # Process Terceira sheets
-    print("Processing Terceira sheets...")
+
     for sheet_name, df in terceira_sheets.items():
         if 'meta' not in sheet_name.lower():
             description = sheet_descriptions.get(sheet_name, sheet_name)
             print(f"  - {description} (Sheet: {sheet_name})")
             terceira_data[description] = df
 
-    # Process Funchal sheets
-    print("Processing Funchal sheets...")
     for sheet_name, df in funchal_sheets.items():
         if 'meta' not in sheet_name.lower():
             description = sheet_descriptions.get(sheet_name, sheet_name)
             print(f"  - {description} (Sheet: {sheet_name})")
             funchal_data[description] = df
 
-    # Process Ponta Delgada sheets
-    print("Processing Ponta Delgada sheets...")
+
     for sheet_name, df in ponta_delgada_sheets.items():
         if 'meta' not in sheet_name.lower():
             description = sheet_descriptions.get(sheet_name, sheet_name)
@@ -277,11 +251,232 @@ def ilhas_ver_todos_os_dados():
         for description, df in ponta_delgada_data.items():
             df.to_excel(writer, sheet_name=f'Ponta Delgada - {description}', index=False)
 
-    print("Merged data saved to IlhasMerged.xlsx")
+    print("Ficheiros mergidos num so com o nome IlhasMerged.xlsx")
+def norte_ver_todos_os_dados():
+    # Define a dictionary for sheet name descriptions
+    sheet_descriptions = {
+        'tmin': 'Precipitação Minima',
+        'tmax': 'Precipitação Máxima',
+        'prec': 'Precipitação'
+    }
 
-#def norte_ver_todos_os_dados(): falta fazer
-#def centro_ver_todos_os_dados(): falta fazer
-#def sul_ver_todos_os_dados(): falta fazer
+    # Load the three Excel files, excluding the metadata sheet if identified
+    porto_sheets = pd.read_excel('porto.xlsx', sheet_name=None)
+    bragancanca_sheets = pd.read_excel('braganca.xlsx', sheet_name=None)
+    Montalegre_sheets = pd.read_excel('Montalegre.xlsx', sheet_name=None)
+    penhas_Douradas_sheets = pd.read_excel('penhasDouradas.xlsx', sheet_name=None)
+
+    # Initialize empty dictionaries to collect dataframes with descriptions
+    bragancanca_data = {}
+    montalegre_data = {}
+    porto_data = {}
+    penhas_Douradas_data = {}
+    # Process Terceira sheets
+
+    for sheet_name, df in bragancanca_sheets.items():
+        if 'meta' not in sheet_name.lower():
+            description = sheet_descriptions.get(sheet_name, sheet_name)
+            print(f"  - {description} (Sheet: {sheet_name})")
+            bragancanca_data[description] = df
+
+    for sheet_name, df in Montalegre_sheets.items():
+        if 'meta' not in sheet_name.lower():
+            description = sheet_descriptions.get(sheet_name, sheet_name)
+            print(f"  - {description} (Sheet: {sheet_name})")
+            montalegre_data[description] = df
+
+    for sheet_name, df in porto_sheets.items():
+        if 'meta' not in sheet_name.lower():
+            description = sheet_descriptions.get(sheet_name, sheet_name)
+            print(f"  - {description} (Sheet: {sheet_name})")
+            porto_data[description] = df
+
+    for sheet_name, df in penhas_Douradas_sheets.items():
+        if 'meta' not in sheet_name.lower():
+            description = sheet_descriptions.get(sheet_name, sheet_name)
+            print(f"  - {description} (Sheet: {sheet_name})")
+            penhas_Douradas_data[description] = df
+
+    # Create a new Excel writer object
+    with pd.ExcelWriter('NorteMerged.xlsx') as writer:
+
+        for description, df in bragancanca_data.items():
+            df.to_excel(writer, sheet_name=f'bragancanca - {description}', index=False)
+
+        for description, df in montalegre_data.items():
+            df.to_excel(writer, sheet_name=f'Montalegre - {description}', index=False)
+
+        for description, df in porto_data.items():
+            df.to_excel(writer, sheet_name=f'Porto - {description}', index=False)
+
+        for description, df in penhas_Douradas_data.items():
+            df.to_excel(writer, sheet_name=f'Penhas Douradas - {description}', index=False)
+
+    print("Ficheiros mergidos num so com o nome NorteMerged.xlsx")
+def centro():
+    while True:
+        print("1.Castelo Branco (1863 - 2018)")
+        print("2.Coimbra (1863 - 2018)")
+        print("3.Evora (1863 - 2018)")
+        print("4.Lisboa (1863 - 2018)")
+        print("5.Portalegre (1863 - 2018)")
+        print("6.Setubal (1863 - 2018)")
+        print("7.Santarem (1863 - 2018)")
+        print("8.Ver todos os dados")
+        print("9.Voltar...")
+        op = input("Escolha a regiao central: (1-7) ")
+        if op == '1':
+            casteloBranco()
+        elif op == '2':
+            coimbra()
+        elif op == '3':
+            evora()
+        elif op == '4':
+            lisboa()
+        elif op == '5':
+            portalegre()
+        elif op == '6':
+            setubal()
+        elif op == '7':
+            santarem()
+        elif op == '8':
+            centro_ver_todos_os_dados()
+        elif op == '9':
+            print("A voltar...")
+            break;
+        else:
+            print("Escolha uma opcao valida (1-8)!")
+def centro_ver_todos_os_dados():
+
+    # Define a dictionary for sheet name descriptions
+    sheet_descriptions = {
+        'tmin': 'Precipitação Minima',
+        'tmax': 'Precipitação Máxima',
+        'prec': 'Precipitação'
+    }
+
+    # Load the three Excel files, excluding the metadata sheet if identified
+    coimbra_sheets = pd.read_excel('coimbra.xlsx', sheet_name=None)
+    evora_sheets = pd.read_excel('evora.xlsx', sheet_name=None)
+    lisboa_sheets = pd.read_excel('lisboa.xlsx', sheet_name=None)
+    portalegre_sheets = pd.read_excel('portalegre.xlsx', sheet_name=None)
+    setubal_sheets = pd.read_excel('setubal.xlsx', sheet_name=None)
+    santarem_sheets = pd.read_excel('santarem.xlsx', sheet_name=None)
+    castelo_Branco_sheets = pd.read_excel('CasteloBranco.xlsx', sheet_name=None)
+
+    # Initialize empty dictionaries to collect dataframes with descriptions
+    coimbra_data = {}
+    evora_data = {}
+    lisboa_data = {}
+    portalegre_data = {}
+    setubal_data = {}
+    santarem_data = {}
+    castelo_Branco_data = {}
+
+    for sheet_name, df in coimbra_sheets.items():
+        if 'meta' not in sheet_name.lower():
+            description = sheet_descriptions.get(sheet_name, sheet_name)
+            print(f"  - {description} (Sheet: {sheet_name})")
+            coimbra_data[description] = df
+
+    for sheet_name, df in evora_sheets.items():
+        if 'meta' not in sheet_name.lower():
+            description = sheet_descriptions.get(sheet_name, sheet_name)
+            print(f"  - {description} (Sheet: {sheet_name})")
+            evora_data[description] = df
+
+    for sheet_name, df in lisboa_sheets.items():
+        if 'meta' not in sheet_name.lower():
+            description = sheet_descriptions.get(sheet_name, sheet_name)
+            print(f"  - {description} (Sheet: {sheet_name})")
+            lisboa_data[description] = df
+
+    for sheet_name, df in portalegre_sheets.items():
+        if 'meta' not in sheet_name.lower():
+            description = sheet_descriptions.get(sheet_name, sheet_name)
+            print(f"  - {description} (Sheet: {sheet_name})")
+            portalegre_data[description] = df
+
+    for sheet_name, df in setubal_sheets.items():
+        if 'meta' not in sheet_name.lower():
+            description = sheet_descriptions.get(sheet_name, sheet_name)
+            print(f"  - {description} (Sheet: {sheet_name})")
+            setubal_data[description] = df
+
+    for sheet_name, df in santarem_sheets.items():
+        if 'meta' not in sheet_name.lower():
+            description = sheet_descriptions.get(sheet_name, sheet_name)
+            print(f"  - {description} (Sheet: {sheet_name})")
+            santarem_data[description] = df
+
+    for sheet_name, df in castelo_Branco_sheets.items():
+        if 'meta' not in sheet_name.lower():
+            description = sheet_descriptions.get(sheet_name, sheet_name)
+            print(f"  - {description} (Sheet: {sheet_name})")
+            castelo_Branco_data[description] = df
+
+
+    # Create a new Excel writer object
+    with pd.ExcelWriter('CentroMerged.xlsx') as writer:
+
+        for description, df in coimbra_data.items():
+            df.to_excel(writer, sheet_name=f'coimbra - {description}', index=False)
+
+        for description, df in evora_data.items():
+            df.to_excel(writer, sheet_name=f'evora - {description}', index=False)
+
+        for description, df in lisboa_data.items():
+            df.to_excel(writer, sheet_name=f'lisboa - {description}', index=False)
+
+        for description, df in portalegre_data.items():
+            df.to_excel(writer, sheet_name=f'portalegre - {description}', index=False)
+
+        for description, df in setubal_data.items():
+            df.to_excel(writer, sheet_name=f'setubal - {description}', index=False)
+
+        for description, df in santarem_data.items():
+            df.to_excel(writer, sheet_name=f'santarem - {description}', index=False)
+
+        for description, df in castelo_Branco_data.items():
+            df.to_excel(writer, sheet_name=f'Castelo Branco - {description}', index=False)
+
+    print("Ficheiros mergidos num so com o nome CentroMerged.xlsx")
+def sul_ver_todos_os_dados():
+
+    # Define a dictionary for sheet name descriptions
+    sheet_descriptions = {
+        'tmin': 'Precipitação Minima',
+        'tmax': 'Precipitação Máxima',
+        'prec': 'Precipitação'
+    }
+
+
+    beja_sheets = pd.read_excel('beja.xlsx', sheet_name=None)
+    faro_sheets = pd.read_excel('faro.xlsx', sheet_name=None)
+
+    beja_data = {}
+    faro_data = {}
+
+    for sheet_name, df in beja_sheets.items():
+        if 'meta' not in sheet_name.lower():
+            description = sheet_descriptions.get(sheet_name, sheet_name)
+            print(f"  - {description} (Sheet: {sheet_name})")
+            beja_data[description] = df
+
+    for sheet_name, df in faro_sheets.items():
+        if 'meta' not in sheet_name.lower():
+            description = sheet_descriptions.get(sheet_name, sheet_name)
+            print(f"  - {description} (Sheet: {sheet_name})")
+            faro_data[description] = df
+
+    with pd.ExcelWriter('SulMerged.xlsx') as writer:
+        for description, df in beja_data.items():
+            df.to_excel(writer, sheet_name=f'beja - {description}', index=False)
+
+        for description, df in faro_data.items():
+            df.to_excel(writer, sheet_name=f'faro - {description}', index=False)
+
+    print("Ficheiros mergidos num so com o nome SulMerged.xlsx")
 
 def faro():
     faro = "faro.xlsx"
